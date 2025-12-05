@@ -1,178 +1,600 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>VIP SECTION</title>
-    <!-- Tailwind CSS CDN for styling -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP SECTION | Nanakojoodds Ghana</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .active-date {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+        .date-tab:hover {
+            background-color: #f3f4f6;
+        }
+        .ghana-gradient {
+            background: linear-gradient(135deg, #006b3f 0%, #fcd116 50%, #ce1126 100%);
+        }
+        .vip-badge {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .counter {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
 </head>
 
 {% load static %}
-<body class="bg-gray-100 p-4 min-h-screen flex flex-col items-center">
-    
-    
-    
-    <nav class="bg-gray-700 p-4 w-full">
-        <div class="container mx-auto flex justify-between items-center">
-            <span class="text-white font-bold text-xl tracking-wider">FJ PREDICTS</span>
-            <div class="flex space-x-8">
-                <a href="{% url 'home' %}" class="text-white hover:text-gray-400 font-bold text-lg">Home</a>
-                <a href="#" class="text-white hover:text-gray-400 font-bold text-lg">About Us</a>
-                <a href="{% url 'payment' %}" class="text-white hover:text-gray-400 font-bold text-lg">VIP</a>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav class="bg-gray-800 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-crown text-white"></i>
+                    </div>
+                    <span class="text-2xl font-bold">
+                        NANAKOJODDS
+                    </span>
+                </div>
+
+                <!-- Menu -->
+                <div class="flex space-x-6 items-center">
+                    <a href="{% url 'home' %}" class="font-medium hover:text-yellow-400 transition-colors">Home</a>
+                    <a href="#" class="font-medium hover:text-yellow-400 transition-colors">About</a>
+                    <a href="{% url 'payment' %}" class="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-bold py-2 px-6 rounded-full transition-all shadow-lg">
+                        <i class="fas fa-crown mr-2"></i>VIP
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
 
-<div class="relative bg-gray-800 text-white p-4 md:p-8 w-full text-center flex items-center justify-center h-[500px] bg-cover bg-center" style="background-image: url('{% static 'images/ss.jpg' %}');">
-    <div class="bg-black bg-opacity-40 backdrop-blur-sm p-6 md:p-12 rounded-xl shadow-2xl max-w-lg mx-auto">
-        <h1 class="text-3xl md:text-5xl font-extrabold mb-2 md:mb-4">
-            <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-white">FJ PREDICTS</span>
-        </h1>
-        <p class="text-lg md:text-xl font-medium mb-6 md:mb-8 text-gray-200">
-            <span class="font-bold">YOUR ULTIMATE BETTING PARTNER.</span><br/>WELCOME TO OUR VIP SECTION . HERE ALL GAMES ARE VERY ACCURATE 
-        </p>
-        <a href="https://t.me/fjpredicts" class="inline-block bg-blue-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300">
-            Join our Telegram Channel
-        </a>
-        <p class="text-xs text-gray-400 mt-2">Image by FJ</p>
-    </div>
-</div>
+    <!-- Hero Section -->
+    <div class="relative bg-gray-800 text-white w-full text-center flex items-center justify-center h-[500px] bg-cover bg-center" style="background-image: url('{% static 'images/ss.jpg' %}');">
+        <div class="bg-black bg-opacity-40 w-full h-full flex items-center justify-center">
+            <div class="max-w-2xl mx-auto px-4">
+                <!-- VIP Trust Badge -->
+                <div class="mb-6">
+                    <span class="vip-badge text-white font-bold py-2 px-6 rounded-full inline-flex items-center space-x-2">
+                        <i class="fas fa-crown"></i>
+                        <span>TRUSTED BY 2,000+ VIP MEMBERS</span>
+                    </span>
+                </div>
 
-
-    <div class="container mx-auto max-w-2xl mt-8">
-        <h1 class="text-4xl font-extrabold text-gray-800 text-center mb-8">VIP BETS</h1>
-        
-        {% if free_tips %}
-            {% for tip in free_tips %}
-                <div class="overflow-x-auto bg-white rounded-xl shadow-lg border border-gray-200 p-4">
-    <table class="min-w-full table-auto">
-        <thead>
-            <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
-                <th class="py-3 px-6 text-left">League</th>
-                <th class="py-3 px-6 text-left">Match</th>
-                <th class="py-3 px-6 text-left">Prediction</th>
-                <th class="py-3 px-6 text-center">Result</th>
-                <th class="py-3 px-6 text-center">Date</th>
-            </tr>
-        </thead>
-        <tbody class="text-gray-600 text-sm font-light">
-            <tr class="border-b border-gray-200 hover:bg-gray-100">
-                <td class="py-3 px-6 text-left whitespace-nowrap">
-                    <span class="font-medium text-blue-600 bg-blue-100 px-3 py-1 rounded-full">{{ tip.league }}</span>
-                </td>
-                <td class="py-3 px-6 text-left">
-                    <div class="font-bold text-gray-900">{{ tip.teams }}</div>
-                </td>
-                <td class="py-3 px-6 text-left">
-                    <p class="text-gray-700">{{ tip.description }}</p>
-                </td>
-                <td class="py-3 px-6 text-center">
-                    {% if tip.results %}
-                        <span class="font-bold text-green-600">{{ tip.results }}</span>
-                    {% else %}
-                        <span class="text-gray-500">Pending</span>
-                    {% endif %}
-                </td>
-                <td class="py-3 px-6 text-center">
-                    <span class="text-gray-500">{{ tip.date_posted|date:"F j, Y" }}</span>
-                </td>
-            </tr>
-            </tbody>
-    </table>
-</div>
-
-            {% endfor %}
-        {% else %}
-            <div class="bg-white p-8 rounded-xl shadow-lg text-center text-gray-500">
-                <p>There are no free tips available right now. Please check back later!</p>
-            </div>
-        {% endif %}
-
-    </div>
-    
-
-    <footer class="bg-gray-900 text-gray-400 py-10 px-4 md:py-16">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-            
-            <div class="col-span-1">
-                <h3 class="text-xl font-bold text-white mb-4">About KOBBYODDS</h3>
-                <p class="text-sm">
-                    KOBBYODDS is your trusted source for expert football betting tips and predictions. Our team of analysts provides daily insights to help you make informed decisions and increase your chances of winning.
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-white">NANAKOJODDS VIP</span>
+                </h1>
+                <p class="text-xl mb-8 text-gray-200">
+                    <span class="font-bold">YOUR ULTIMATE BETTING PARTNER.</span><br/>WELCOME TO OUR VIP SECTION. HERE ALL GAMES ARE 90%+ ACCURATE
                 </p>
-            </div>
-            
-            <div class="col-span-1">
-                <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
-                <ul class="space-y-2">
-                    <li><a href="#" class="hover:text-white transition-colors duration-300">Home</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors duration-300">Free Tips</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors duration-300">Premium Plans</a></li>
-                    <li><a href="#" class="hover:text-white transition-colors duration-300">Contact Us</a></li>
-                </ul>
-            </div>
-            
-            <div class="col-span-1">
-                <h3 class="text-xl font-bold text-white mb-4">Follow Us</h3>
-                <div class="flex space-x-4 mb-6">
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.873v-6.985h-2.54V12h2.54V9.794c0-2.505 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.77l-.44 2.89h-2.33v6.985C18.343 21.128 22 16.991 22 12z" />
-                        </svg>
+
+                <!-- VIP Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+                    <div class="bg-white bg-opacity-20 backdrop-blur-sm p-3 rounded-lg">
+                        <div class="text-2xl font-bold">2,000+</div>
+                        <div class="text-sm opacity-90">VIP Members</div>
+                    </div>
+                    <div class="bg-white bg-opacity-20 backdrop-blur-sm p-3 rounded-lg">
+                        <div class="text-2xl font-bold">90%+</div>
+                        <div class="text-sm opacity-90">Accuracy Rate</div>
+                    </div>
+                    <div class="bg-white bg-opacity-20 backdrop-blur-sm p-3 rounded-lg">
+                        <div class="text-2xl font-bold">₵50K+</div>
+                        <div class="text-sm opacity-90">Monthly Winnings</div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="https://t.me/nanakojoodds" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all">
+                        <i class="fab fa-telegram mr-2"></i>Join VIP Telegram
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M8.29 20.37c-3.15 0-5.71-2.56-5.71-5.71s2.56-5.71 5.71-5.71h1.14v1.71h-1.14c-2.18 0-3.95 1.77-3.95 3.95s1.77 3.95 3.95 3.95h1.71c2.18 0 3.95-1.77 3.95-3.95V8.29h1.71v6.37c0 3.15-2.56 5.71-5.71 5.71H8.29zm7.42-12.08h-1.14V6.58h1.14c2.18 0 3.95 1.77 3.95 3.95s-1.77 3.95-3.95 3.95h-1.71c-2.18 0-3.95 1.77-3.95-3.95V8.29h-1.71v6.37c0 3.15 2.56 5.71 5.71 5.71h1.14c3.15 0 5.71-2.56 5.71-5.71V8.29z" />
-                        </svg>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.328 15.658c-1.343 0-2.434-.337-3.21-1.01-1.026-.879-1.539-2.074-1.539-3.58 0-1.506.513-2.701 1.539-3.58.776-.673 1.867-1.01 3.21-1.01s2.434.337 3.21 1.01c1.026.879 1.539 2.074 1.539 3.58 0 1.506-.513 2.701-1.539 3.58-.776.673-1.867 1.01-3.21 1.01zm-5.658-5.263h-.001c.083.082.167.165.25.247.166.165.334.33.501.496.25.247.5.494.75.742.083.082.167.164.25.246-.167.165-.333.33-.5.495-.25.247-.5.494-.75.741-.083.082-.167.165-.25.247-.166.165-.334.33-.501.496.25.247.5.494.75.742.083.082.167.164.25.246.167.165.333.33.5.495.25.247.5.494.75.741.083.082.167.165.25.247.166.165.334.33.501.496.25.247.5.494.75.742.083.082.167.164.25.246-.167.165-.333.33-.5.495-.25.247-.5.494-.75.741-.083.082-.167.165-.25.247-.166.165-.334.33-.501.496.25.247.5.494.75.742.083.082.167.164.25.246-.167.165-.333.33-.5.495-.25.247-.5.494-.75.741-.083.082-.167.165-.25.247-.166.165-.334.33-.501.496.25.247.5.494.75.742.083.082.167.164.25.246-.167.165-.333.33-.5.495-.25.247-.5.494-.75.741-.083.082-.167.165-.25.247-.166.165-.334.33-.501.496.25.247.5.494.75.742.083.082.167.164.25.246-.167.165-.333.33-.5.495-.25.247-.5.494-.75.741-.083.082-.167.165-.25.247-.166.165-.334.33-.501.496.25.247.5.494.75.742.083.082.167.164.25.246-.167.165-.333.33-.5.495-.25.247-.5.494-.75.741-.083.082-.167.165-.25.247z" />
-                        </svg>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.328 15.658c-1.343 0-2.434-.337-3.21-1.01-1.026-.879-1.539-2.074-1.539-3.58 0-1.506.513-2.701 1.539-3.58.776-.673 1.867-1.01 3.21-1.01s2.434.337 3.21 1.01c1.026.879 1.539 2.074 1.539 3.58 0 1.506-.513 2.701-1.539 3.58-.776.673-1.867 1.01-3.21 1.01zm-5.658-5.263h-.001c.083.082.167.165.25.247.166.165.334.33.501.496.25.247.5.494.75.742.083.082.167.164.25.246-.167.165-.333.33-.5.495-.25.247-.5.494-.75.741-.083.082-.167.165-.25.247-.166.165-.334.33-.501.496.25.247.5.494.75.742.083.082.167.164.25.246-.167.165-.333.33-.5.495-.25.247-.5.494-.75.741-.083.082-.167.165-.25.247-.166.165-.334.33-.501.496.25.247.5.494.75.742.083.082.167.164.25.246-.167.165-.333.33-.5.495-.25.247-.5.494-.75.741-.083.082-.167.165-.25.247-.166.165-.334.33-.501.496.25.247.5.494.75.742.083.082.167.164.25.246-.167.165-.333.33-.5.495-.25.247-.5.494-.75.741-.083.082-.167.165-.25.247-.166.165-.334.33-.501.496.25.247.5.494.75.742.083.082.167.164.25.246-.167.165-.333.33-.5.495-.25.247-.5.494-.75.741-.083.082-.167.165-.25.247-.166.165-.334.33-.501.496.25.247.5.494.75.742.083.082.167.164.25.246-.167.165-.333.33-.5.495-.25.247-.5.494-.75.741-.083.082-.167.165-.25.247z" />
-                        </svg>
+                    <a href="{% url 'payment' %}" class="ghana-gradient hover:opacity-90 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all">
+                        <i class="fas fa-crown mr-2"></i>UPGRADE TO VIP
                     </a>
                 </div>
             </div>
-
-            <div class="col-span-1">
-                <h3 class="text-xl font-bold text-white mb-4">Contact</h3>
-                <p class="text-sm mb-2">Email: <a href="mailto:info@kobbyodds.com" class="hover:underline">info@kobbyodds.com</a></p>
-                <p class="text-sm mb-2">Telegram: <a href="#" class="hover:underline">@KobbyOdds</a></p>
-                <p class="text-sm">Ghana, West Africa</p>
-            </div>
-            
         </div>
-        
-        <hr class="border-gray-700 my-8">
-        
-        <div class="text-center text-sm md:flex md:justify-between md:items-center">
-            <p>&copy; <span id="current-year"></span> KOBBYODDS. All rights reserved.</p>
-            <p class="mt-2 md:mt-0">
-                <a href="#" class="hover:text-white transition-colors duration-300">Privacy Policy</a> | 
-                <a href="#" class="hover:text-white transition-colors duration-300">Terms of Service</a>
-            </p>
-        </div>
-        
     </div>
-</footer>
 
-<script>
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-</script>
+    <!-- VIP Stats Section -->
+    <div class="bg-gradient-to-r from-yellow-50 to-orange-50 py-8">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Why 2,000+ Ghanaians Choose VIP</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Join our community of successful VIP bettors getting consistent wins
+                </p>
+            </div>
 
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-yellow-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-users text-yellow-600 text-2xl"></i>
+                    </div>
+                    <div class="counter">2,000+</div>
+                    <h4 class="font-bold text-gray-800 mt-2">VIP Members</h4>
+                    <p class="text-sm text-gray-600 mt-1">Active Ghanaian bettors</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-chart-line text-green-600 text-2xl"></i>
+                    </div>
+                    <div class="counter">90%+</div>
+                    <h4 class="font-bold text-gray-800 mt-2">Accuracy Rate</h4>
+                    <p class="text-sm text-gray-600 mt-1">Proven success rate</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-money-bill-wave text-blue-600 text-2xl"></i>
+                    </div>
+                    <div class="counter">₵50K+</div>
+                    <h4 class="font-bold text-gray-800 mt-2">Monthly Winnings</h4>
+                    <p class="text-sm text-gray-600 mt-1">Collective monthly profits</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-purple-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-headset text-purple-600 text-2xl"></i>
+                    </div>
+                    <div class="counter">24/7</div>
+                    <h4 class="font-bold text-gray-800 mt-2">Ghana Support</h4>
+                    <p class="text-sm text-gray-600 mt-1">Expert assistance</p>
+                </div>
+            </div>
+
+            <!-- VIP Testimonials -->
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl border-2 border-yellow-200 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white font-bold mr-3">
+                            KA
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Kwame A. (VIP)</h4>
+                            <p class="text-sm text-gray-600">📍 Accra • 6 months VIP</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"Won ₵5,000 with VIP tips! Best ₵50 I ever spent."</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl border-2 border-yellow-200 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white font-bold mr-3">
+                            AM
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Ama M. (VIP)</h4>
+                            <p class="text-sm text-gray-600">📍 Kumasi • 4 months VIP</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"Consistent wins every week! VIP is worth every pesewa."</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl border-2 border-yellow-200 shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white font-bold mr-3">
+                            KO
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Kojo O. (VIP)</h4>
+                            <p class="text-sm text-gray-600">📍 Takoradi • 1 year VIP</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"Made ₵15,000+ since joining VIP. Life-changing!"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main VIP Content -->
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Date Navigation -->
+        <div class="mb-8">
+            <div class="text-center mb-6">
+                <h2 class="text-4xl font-extrabold text-gray-800 mb-2">VIP BETS</h2>
+                <p class="text-gray-600">Exclusive 90%+ accurate predictions for our 2,000+ VIP members</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-2 mb-6">
+                <button onclick="showSection('today')" id="todayTab" class="px-6 py-3 rounded-lg font-medium border border-gray-300 date-tab active-date">
+                    Today
+                </button>
+                <button onclick="showSection('yesterday')" id="yesterdayTab" class="px-6 py-3 rounded-lg font-medium border border-gray-300 date-tab">
+                    Yesterday
+                </button>
+                <button onclick="showSection('tomorrow')" id="tomorrowTab" class="px-6 py-3 rounded-lg font-medium border border-gray-300 date-tab">
+                    Tomorrow
+                </button>
+            </div>
+        </div>
+
+        <!-- VIP Tips Sections -->
+        <!-- Today's VIP Tips -->
+        <div id="todaySection" class="tips-section">
+            {% if today_tips %}
+                <div class="space-y-4">
+                    {% for tip in today_tips %}
+                        <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="vip-badge text-white font-bold py-1 px-4 rounded-full text-sm">
+                                    <i class="fas fa-crown mr-1"></i>VIP PREDICTION
+                                </span>
+                                <span class="text-sm text-yellow-600 font-bold">
+                                    <i class="fas fa-bolt mr-1"></i>90% ACCURACY
+                                </span>
+                            </div>
+
+                            <table class="min-w-full table-auto">
+                                <thead>
+                                    <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                        <th class="py-3 px-6 text-left">League</th>
+                                        <th class="py-3 px-6 text-left">Match</th>
+                                        <th class="py-3 px-6 text-left">Prediction</th>
+                                        <th class="py-3 px-6 text-center">Result</th>
+                                        <th class="py-3 px-6 text-center">Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-600 text-sm font-light">
+                                    <tr class="border-b border-gray-200 hover:bg-yellow-50">
+                                        <td class="py-3 px-6 text-left whitespace-nowrap">
+                                            <span class="font-medium text-blue-600 bg-blue-100 px-3 py-1 rounded-full">{{ tip.league }}</span>
+                                        </td>
+                                        <td class="py-3 px-6 text-left">
+                                            <div class="font-bold text-gray-900">{{ tip.teams }}</div>
+                                        </td>
+                                        <td class="py-3 px-6 text-left">
+                                            <p class="text-gray-700">{{ tip.description }}</p>
+                                        </td>
+                                        <td class="py-3 px-6 text-center">
+                                            {% if tip.results %}
+                                                <span class="font-bold text-green-600">{{ tip.results }}</span>
+                                            {% else %}
+                                                <span class="text-gray-500">Pending</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="py-3 px-6 text-center">
+                                            <span class="text-gray-500">{{ tip.date_posted|date:"g:i A" }}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center text-gray-500">
+                    <i class="fas fa-crown text-4xl text-yellow-300 mb-4"></i>
+                    <p class="text-lg">No VIP tips available for today.</p>
+                    <p class="text-sm mt-2">VIP predictions will be updated soon. Check back later!</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Yesterday's VIP Tips -->
+        <div id="yesterdaySection" class="tips-section hidden">
+            {% if yesterday_tips %}
+                <div class="space-y-4">
+                    {% for tip in yesterday_tips %}
+                        <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="vip-badge text-white font-bold py-1 px-4 rounded-full text-sm">
+                                    <i class="fas fa-crown mr-1"></i>VIP PREDICTION
+                                </span>
+                                <span class="text-sm {% if tip.results == 'WON' %}text-green-600{% elif tip.results == 'LOST' %}text-red-600{% else %}text-yellow-600{% endif %} font-bold">
+                                    {% if tip.results == 'WON' %}<i class="fas fa-check-circle mr-1"></i>WON{% elif tip.results == 'LOST' %}<i class="fas fa-times-circle mr-1"></i>LOST{% else %}<i class="fas fa-clock mr-1"></i>PENDING{% endif %}
+                                </span>
+                            </div>
+
+                            <table class="min-w-full table-auto">
+                                <thead>
+                                    <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                        <th class="py-3 px-6 text-left">League</th>
+                                        <th class="py-3 px-6 text-left">Match</th>
+                                        <th class="py-3 px-6 text-left">Prediction</th>
+                                        <th class="py-3 px-6 text-center">Result</th>
+                                        <th class="py-3 px-6 text-center">Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-600 text-sm font-light">
+                                    <tr class="border-b border-gray-200 hover:bg-yellow-50">
+                                        <td class="py-3 px-6 text-left whitespace-nowrap">
+                                            <span class="font-medium text-blue-600 bg-blue-100 px-3 py-1 rounded-full">{{ tip.league }}</span>
+                                        </td>
+                                        <td class="py-3 px-6 text-left">
+                                            <div class="font-bold text-gray-900">{{ tip.teams }}</div>
+                                        </td>
+                                        <td class="py-3 px-6 text-left">
+                                            <p class="text-gray-700">{{ tip.description }}</p>
+                                        </td>
+                                        <td class="py-3 px-6 text-center">
+                                            {% if tip.results %}
+                                                <span class="font-bold {% if tip.results == 'WON' %}text-green-600{% else %}text-red-600{% endif %}">{{ tip.results }}</span>
+                                            {% else %}
+                                                <span class="text-gray-500">Pending</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="py-3 px-6 text-center">
+                                            <span class="text-gray-500">{{ tip.date_posted|date:"g:i A" }}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center text-gray-500">
+                    <i class="fas fa-crown text-4xl text-yellow-300 mb-4"></i>
+                    <p class="text-lg">No VIP tips available for yesterday.</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Tomorrow's VIP Tips -->
+        <div id="tomorrowSection" class="tips-section hidden">
+            {% if tomorrow_tips %}
+                <div class="space-y-4">
+                    {% for tip in tomorrow_tips %}
+                        <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-4">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="vip-badge text-white font-bold py-1 px-4 rounded-full text-sm">
+                                    <i class="fas fa-crown mr-1"></i>VIP PREDICTION
+                                </span>
+                                <span class="text-sm text-blue-600 font-bold">
+                                    <i class="fas fa-clock mr-1"></i>UPCOMING
+                                </span>
+                            </div>
+
+                            <table class="min-w-full table-auto">
+                                <thead>
+                                    <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                        <th class="py-3 px-6 text-left">League</th>
+                                        <th class="py-3 px-6 text-left">Match</th>
+                                        <th class="py-3 px-6 text-left">Prediction</th>
+                                        <th class="py-3 px-6 text-center">Status</th>
+                                        <th class="py-3 px-6 text-center">Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-600 text-sm font-light">
+                                    <tr class="border-b border-gray-200 hover:bg-yellow-50">
+                                        <td class="py-3 px-6 text-left whitespace-nowrap">
+                                            <span class="font-medium text-blue-600 bg-blue-100 px-3 py-1 rounded-full">{{ tip.league }}</span>
+                                        </td>
+                                        <td class="py-3 px-6 text-left">
+                                            <div class="font-bold text-gray-900">{{ tip.teams }}</div>
+                                        </td>
+                                        <td class="py-3 px-6 text-left">
+                                            <p class="text-gray-700">{{ tip.description }}</p>
+                                        </td>
+                                        <td class="py-3 px-6 text-center">
+                                            <span class="text-blue-500 font-bold">Upcoming</span>
+                                        </td>
+                                        <td class="py-3 px-6 text-center">
+                                            <span class="text-gray-500">{{ tip.date_posted|date:"g:i A" }}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center text-gray-500">
+                    <i class="fas fa-crown text-4xl text-yellow-300 mb-4"></i>
+                    <p class="text-lg">No VIP tips available for tomorrow yet.</p>
+                    <p class="text-sm mt-2">VIP predictions for tomorrow will be updated soon.</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- VIP Upgrade Banner -->
+        <div class="mt-12 p-6 bg-gradient-to-r from-gray-900 to-gray-800 border-2 border-yellow-500 rounded-xl">
+            <div class="text-center">
+                <div class="mb-4">
+                    <span class="vip-badge text-white font-bold py-2 px-6 rounded-full inline-flex items-center space-x-2">
+                        <i class="fas fa-crown"></i>
+                        <span>JOIN 2,000+ SUCCESSFUL GHANAIANS</span>
+                    </span>
+                </div>
+
+                <h3 class="text-2xl font-bold text-white mb-4">
+                    <i class="fas fa-crown text-yellow-400 mr-2"></i>
+                    Get Access to Premium VIP Predictions
+                </h3>
+                <p class="text-gray-200 mb-6 max-w-2xl mx-auto">
+                    These are just sample VIP predictions. To get access to all 90%+ accurate tips, live match updates,
+                    expert analysis, and 24/7 Ghana support, upgrade to VIP for just ₵50 (one-time payment, lifetime access).
+                </p>
+                <a href="{% url 'payment' %}" class="inline-block ghana-gradient hover:opacity-90 text-white font-bold py-4 px-10 rounded-full shadow-lg transition-all text-lg">
+                    <i class="fas fa-crown mr-2"></i>UPGRADE TO VIP - ₵50 LIFETIME ACCESS
+                </a>
+
+                <!-- VIP Benefits -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                    <div class="text-center">
+                        <div class="text-xl font-bold text-yellow-400">90%+</div>
+                        <div class="text-sm text-gray-300">Accuracy</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-xl font-bold text-yellow-400">24/7</div>
+                        <div class="text-sm text-gray-300">Ghana Support</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-xl font-bold text-yellow-400">₵50</div>
+                        <div class="text-sm text-gray-300">One-time</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-xl font-bold text-yellow-400">2,000+</div>
+                        <div class="text-sm text-gray-300">VIP Members</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Important VIP Note -->
+        <div class="mt-8 bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
+            <div class="flex items-start">
+                <i class="fas fa-crown text-yellow-500 text-xl mt-1 mr-3"></i>
+                <div>
+                    <h4 class="font-bold text-gray-800 mb-1">VIP Members Get 90%+ Accuracy</h4>
+                    <p class="text-gray-700">
+                        These are sample VIP predictions shown to demonstrate quality. Actual VIP members get access to
+                        <span class="font-bold text-green-600">all predictions with 90%+ accuracy rate</span>, detailed analysis, live match updates,
+                        and direct support from our expert tipsters.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-10 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+
+                <div class="col-span-1">
+                    <h3 class="text-xl font-bold text-white mb-4">About NANAKOJODDS</h3>
+                    <p class="text-sm">
+                        Trusted by <span class="font-bold text-yellow-400">2,000+ Ghanaian VIP members</span>,
+                        NANAKOJODDS is your premium source for expert football betting tips and predictions.
+                    </p>
+                    <div class="mt-4">
+                        <span class="vip-badge text-white font-bold py-1 px-4 rounded-full text-sm">
+                            <i class="fas fa-users mr-1"></i>2,000+ VIP COMMUNITY
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-span-1">
+                    <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="{% url 'home' %}" class="hover:text-yellow-400 transition-colors duration-300">Home</a></li>
+                        <li><a href="#" class="hover:text-yellow-400 transition-colors duration-300">Free Tips</a></li>
+                        <li><a href="#" class="hover:text-yellow-400 transition-colors duration-300">VIP Section</a></li>
+                        <li><a href="#" class="hover:text-yellow-400 transition-colors duration-300">Contact Support</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-span-1">
+                    <h3 class="text-xl font-bold text-white mb-4">VIP Support</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <i class="fab fa-telegram text-yellow-500 mt-1 mr-3"></i>
+                            <span>Telegram: <a href="https://t.me/nanakojoodds" class="text-blue-400 hover:underline">@nanakojoodds</a></span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fab fa-whatsapp text-yellow-500 mt-1 mr-3"></i>
+                            <span>WhatsApp: <span class="text-green-400">+233 55 123 4567</span></span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-headset text-yellow-500 mt-1 mr-3"></i>
+                            <span>24/7 Ghana VIP Support</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-span-1">
+                    <h3 class="text-xl font-bold text-white mb-4">Contact</h3>
+                    <p class="text-sm mb-2">Email: <a href="mailto:support@nanakojoodds.com" class="hover:underline text-yellow-400">support@nanakojoodds.com</a></p>
+                    <p class="text-sm mb-2">VIP Payment: <span class="text-green-400">₵50 One-time</span></p>
+                    <p class="text-sm">Ghana, West Africa</p>
+                </div>
+
+            </div>
+
+            <hr class="border-gray-700 my-8">
+
+            <div class="text-center text-sm md:flex md:justify-between md:items-center">
+                <p>&copy; <span id="current-year"></span> NANAKOJODDS VIP. Trusted by 2,000+ Ghanaian bettors.</p>
+                <p class="mt-2 md:mt-0">
+                    <a href="#" class="hover:text-yellow-400 transition-colors duration-300">VIP Terms</a> |
+                    <a href="#" class="hover:text-yellow-400 transition-colors duration-300">Privacy Policy</a>
+                </p>
+            </div>
+
+        </div>
+    </footer>
+
+    <script>
+        // Show/Hide Sections
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.tips-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Remove active class from all tabs
+            document.querySelectorAll('.date-tab').forEach(tab => {
+                tab.classList.remove('active-date');
+                tab.classList.add('border-gray-300');
+                tab.classList.remove('text-white');
+            });
+
+            // Show selected section
+            document.getElementById(sectionName + 'Section').classList.remove('hidden');
+
+            // Add active class to selected tab
+            const selectedTab = document.getElementById(sectionName + 'Tab');
+            selectedTab.classList.add('active-date');
+            selectedTab.classList.remove('border-gray-300');
+            selectedTab.classList.add('text-white');
+        }
+
+        // Set current year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Initialize with today's tips
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('today');
+        });
+
+        // Animated Counter
+        function animateCounter(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.innerHTML = Math.floor(progress * (end - start) + start) + "+";
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Animate counters
+        document.addEventListener('DOMContentLoaded', function() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const value = counter.textContent.replace('+', '');
+                const numValue = parseInt(value);
+                counter.textContent = '0';
+                setTimeout(() => {
+                    animateCounter(counter, 0, numValue, 2000);
+                }, 1000);
+            });
+        });
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
