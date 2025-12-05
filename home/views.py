@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
-from .models import FreeTip, VIP, AdminPayment
+from .models import FreeTip, VIP, AdminPayment, DailyBookingCode
 from django.conf import settings
 from django.contrib import messages
 from django.urls import reverse
@@ -35,12 +35,20 @@ def tips_list(request):
     yesterday_tips = FreeTip.objects.filter(date_posted__date=yesterday).order_by('-date_posted')
     tomorrow_tips = FreeTip.objects.filter(date_posted__date=tomorrow).order_by('-date_posted')
 
+    # Get booking codes for each date
+    today_booking_code = DailyBookingCode.objects.filter(date=today).first()
+    yesterday_booking_code = DailyBookingCode.objects.filter(date=yesterday).first()
+    tomorrow_booking_code = DailyBookingCode.objects.filter(date=tomorrow).first()
+
     context = {
         'free_tips': all_free_tips,
         'today_tips': today_tips,
         'yesterday_tips': yesterday_tips,
         'tomorrow_tips': tomorrow_tips,
-        'current_date': today
+        'current_date': today,
+        'today_booking_code': today_booking_code.free_tips_code if today_booking_code else None,
+        'yesterday_booking_code': yesterday_booking_code.free_tips_code if yesterday_booking_code else None,
+        'tomorrow_booking_code': tomorrow_booking_code.free_tips_code if tomorrow_booking_code else None,
     }
     return render(request, 'list.html', context)
 
@@ -60,12 +68,20 @@ def vip(request):
     yesterday_vip = VIP.objects.filter(date_posted__date=yesterday).order_by('-date_posted')
     tomorrow_vip = VIP.objects.filter(date_posted__date=tomorrow).order_by('-date_posted')
 
+    # Get booking codes for each date
+    today_booking_code = DailyBookingCode.objects.filter(date=today).first()
+    yesterday_booking_code = DailyBookingCode.objects.filter(date=yesterday).first()
+    tomorrow_booking_code = DailyBookingCode.objects.filter(date=tomorrow).first()
+
     context = {
         'free_tips': all_vip_tips,
         'today_tips': today_vip,
         'yesterday_tips': yesterday_vip,
         'tomorrow_tips': tomorrow_vip,
-        'current_date': today
+        'current_date': today,
+        'today_booking_code': today_booking_code.vip_code if today_booking_code else None,
+        'yesterday_booking_code': yesterday_booking_code.vip_code if yesterday_booking_code else None,
+        'tomorrow_booking_code': tomorrow_booking_code.vip_code if tomorrow_booking_code else None,
     }
     return render(request, 'vip.html', context)
 
