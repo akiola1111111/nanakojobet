@@ -41,6 +41,21 @@
                 background-blend-mode: overlay;
             }
         }
+        .booking-code-container {
+            transition: all 0.3s ease;
+        }
+        .booking-code-display {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .copy-btn {
+            transition: all 0.3s ease;
+        }
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 
@@ -107,19 +122,19 @@
                 <h1 class="text-3xl md:text-4xl font-extrabold mb-2">
                     HELLO I'M <span class="text-yellow-400">NANAKOJODDS</span>
                 </h1>
-                <p class="text-lg md:text-xl font-bold mb-1"> <!-- Reduced from mb-2 to mb-1 -->
+                <p class="text-lg md:text-xl font-bold mb-1">
                     YOUR ULTIMATE BETTING PARTNER
                 </p>
-                <p class="text-sm md:text-base mb-3 max-w-xl mx-auto"> <!-- Reduced from mb-4 to mb-3 -->
+                <p class="text-sm md:text-base mb-3 max-w-xl mx-auto">
                     Get your daily football tips and predictions from our expert. Join our community and start winning.
                 </p>
                 
                 <!-- Two buttons side by side with EVEN MORE spacing and bigger buttons -->
-                <div class="flex flex-col sm:flex-row gap-8 justify-center mt-4"> <!-- Changed from gap-6 to gap-8 for maximum space, added mt-4 -->
-                    <a href="https://t.me/nanakojoodds" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-full shadow-lg transition-all flex-1 sm:flex-none text-center text-lg md:text-xl"> <!-- Made even bigger -->
+                <div class="flex flex-col sm:flex-row gap-8 justify-center mt-4">
+                    <a href="https://t.me/nanakojoodds" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-full shadow-lg transition-all flex-1 sm:flex-none text-center text-lg md:text-xl">
                         <i class="fab fa-telegram mr-3 text-xl"></i>Join Telegram Channel
                     </a>
-                    <a href="{% url 'payment' %}" class="ghana-gradient hover:opacity-90 text-white font-bold py-4 px-10 rounded-full shadow-lg transition-all flex-1 sm:flex-none text-center text-lg md:text-xl"> <!-- Made even bigger -->
+                    <a href="{% url 'payment' %}" class="ghana-gradient hover:opacity-90 text-white font-bold py-4 px-10 rounded-full shadow-lg transition-all flex-1 sm:flex-none text-center text-lg md:text-xl">
                         <i class="fas fa-crown mr-3 text-xl"></i>GET VIP ODDS
                     </a>
                 </div>
@@ -131,8 +146,7 @@
         <!-- Date Navigation - Reordered to Yesterday, Today, Tomorrow -->
         <div class="mb-6">
             <div class="text-center mb-4">
-                <h2 class="text-2xl md:text-4xl font-extrabold text-gray-800 mb-1 tracking-wider">FREE BETTING TIPS</h2> <!-- Changed md:text-3xl to md:text-4xl and added tracking-wider -->
-                <!-- Removed "Used and trusted by Ghanaian bettors" text -->
+                <h2 class="text-2xl md:text-4xl font-extrabold text-gray-800 mb-1 tracking-wider">FREE BETTING TIPS</h2>
             </div>
             
             <div class="flex flex-wrap justify-center gap-1 mb-4">
@@ -192,6 +206,36 @@
                         </div>
                     {% endfor %}
                 </div>
+                
+                <!-- Booking Code Section (appears after all games) -->
+                {% if yesterday_booking_code %}
+                <div class="mt-6 booking-code-container">
+                    <div class="bg-gradient-to-r from-blue-50 to-blue-100 border-2 border-blue-200 rounded-lg p-4">
+                        <div class="flex flex-col items-center">
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-ticket-alt text-blue-600 text-lg mr-2"></i>
+                                <h3 class="text-lg font-bold text-gray-800">Complete Booking Code</h3>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4 text-center">
+                                Use this single code to place all bets for yesterday's matches
+                            </p>
+                            <div class="flex flex-col md:flex-row items-center justify-center space-y-3 md:space-y-0 md:space-x-4">
+                                <div class="booking-code-display bg-white border-2 border-blue-300 text-blue-700 px-6 py-3 rounded-lg text-lg font-mono shadow-md">
+                                    {{ yesterday_booking_code }}
+                                </div>
+                                <button onclick="copyToClipboard('{{ yesterday_booking_code }}', this)" 
+                                        class="copy-btn bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all flex items-center">
+                                    <i class="fas fa-copy mr-2"></i>Copy Booking Code
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-3 text-center">
+                                Click "Copy Booking Code" to copy the complete code to your clipboard
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
             {% else %}
                 <!-- When no tips available, show message -->
                 <div class="bg-white p-4 md:p-6 rounded-lg shadow text-center text-gray-500 mb-6">
@@ -242,6 +286,36 @@
                         </div>
                     {% endfor %}
                 </div>
+                
+                <!-- Booking Code Section (appears after all games) -->
+                {% if today_booking_code %}
+                <div class="mt-6 booking-code-container">
+                    <div class="bg-gradient-to-r from-green-50 to-green-100 border-2 border-green-200 rounded-lg p-4">
+                        <div class="flex flex-col items-center">
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-ticket-alt text-green-600 text-lg mr-2"></i>
+                                <h3 class="text-lg font-bold text-gray-800">Complete Booking Code</h3>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4 text-center">
+                                Use this single code to place all bets for today's matches
+                            </p>
+                            <div class="flex flex-col md:flex-row items-center justify-center space-y-3 md:space-y-0 md:space-x-4">
+                                <div class="booking-code-display bg-white border-2 border-green-300 text-green-700 px-6 py-3 rounded-lg text-lg font-mono shadow-md">
+                                    {{ today_booking_code }}
+                                </div>
+                                <button onclick="copyToClipboard('{{ today_booking_code }}', this)" 
+                                        class="copy-btn bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-all flex items-center">
+                                    <i class="fas fa-copy mr-2"></i>Copy Booking Code
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-3 text-center">
+                                Click "Copy Booking Code" to copy the complete code to your clipboard
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
             {% else %}
                 <!-- When no tips available, show message -->
                 <div class="bg-white p-4 md:p-6 rounded-lg shadow text-center text-gray-500 mb-6">
@@ -289,6 +363,36 @@
                         </div>
                     {% endfor %}
                 </div>
+                
+                <!-- Booking Code Section (appears after all games) -->
+                {% if tomorrow_booking_code %}
+                <div class="mt-6 booking-code-container">
+                    <div class="bg-gradient-to-r from-purple-50 to-purple-100 border-2 border-purple-200 rounded-lg p-4">
+                        <div class="flex flex-col items-center">
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-ticket-alt text-purple-600 text-lg mr-2"></i>
+                                <h3 class="text-lg font-bold text-gray-800">Complete Booking Code</h3>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4 text-center">
+                                Use this single code to place all bets for tomorrow's matches
+                            </p>
+                            <div class="flex flex-col md:flex-row items-center justify-center space-y-3 md:space-y-0 md:space-x-4">
+                                <div class="booking-code-display bg-white border-2 border-purple-300 text-purple-700 px-6 py-3 rounded-lg text-lg font-mono shadow-md">
+                                    {{ tomorrow_booking_code }}
+                                </div>
+                                <button onclick="copyToClipboard('{{ tomorrow_booking_code }}', this)" 
+                                        class="copy-btn bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-all flex items-center">
+                                    <i class="fas fa-copy mr-2"></i>Copy Booking Code
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-3 text-center">
+                                Click "Copy Booking Code" to copy the complete code to your clipboard
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
             {% else %}
                 <!-- When no tips available, show message -->
                 <div class="bg-white p-4 md:p-6 rounded-lg shadow text-center text-gray-500 mb-6">
@@ -440,7 +544,40 @@
         // Set current year
         document.getElementById('current-year').textContent = new Date().getFullYear();
         
-        // Initialize with yesterday's tips (since that's first now)
+        // Copy to clipboard function
+        function copyToClipboard(text, buttonElement) {
+            navigator.clipboard.writeText(text).then(function() {
+                // Store original content
+                const originalHTML = buttonElement.innerHTML;
+                const originalClasses = buttonElement.className;
+                
+                // Change to success state
+                buttonElement.innerHTML = '<i class="fas fa-check mr-2"></i>Copied!';
+                buttonElement.className = originalClasses.replace('hover:bg-blue-700', '').replace('hover:bg-green-700', '').replace('hover:bg-purple-700', '');
+                
+                if (buttonElement.classList.contains('bg-blue-600')) {
+                    buttonElement.classList.remove('bg-blue-600');
+                    buttonElement.classList.add('bg-green-600');
+                } else if (buttonElement.classList.contains('bg-green-600')) {
+                    buttonElement.classList.remove('bg-green-600');
+                    buttonElement.classList.add('bg-green-600');
+                } else if (buttonElement.classList.contains('bg-purple-600')) {
+                    buttonElement.classList.remove('bg-purple-600');
+                    buttonElement.classList.add('bg-green-600');
+                }
+                
+                // Revert after 2 seconds
+                setTimeout(function() {
+                    buttonElement.innerHTML = originalHTML;
+                    buttonElement.className = originalClasses;
+                }, 2000);
+            }).catch(function(err) {
+                console.error('Could not copy text: ', err);
+                alert('Failed to copy code. Please copy manually: ' + text);
+            });
+        }
+        
+        // Initialize with yesterday's tips
         document.addEventListener('DOMContentLoaded', function() {
             showSection('yesterday');
         });
